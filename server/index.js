@@ -3,10 +3,11 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-mongoose.connect(
-    // `mongodb+srv://quanshenjoelmichael21s:joelmichael94@jms-fs.ofi9vbd.mongodb.net/Finance?retryWrites=true&w=majority`
-    // need to find out how to connect to mongoose server, I forgot
-);
+// mongoose
+//     .connect
+//     // `mongodb+srv://quanshenjoelmichael21s:joelmichael94@jms-fs.ofi9vbd.mongodb.net/Finance?retryWrites=true&w=majority`
+//     // need to find out how to connect to mongoose server, I forgot
+//     ();
 
 require("dotenv").config();
 app.use(express.json());
@@ -18,6 +19,7 @@ app.use(
 app.use(express.static("public"));
 
 const { PORT, DB_HOST, DB_PORT, DB_NAME } = process.env;
+mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`);
 
 app.use("/users", require("./api/users"));
 
