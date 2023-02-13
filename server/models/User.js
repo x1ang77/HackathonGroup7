@@ -18,6 +18,9 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    exec: {
+        type: Number
+    }
 });
 
 module.exports = mongoose.model("user", UserSchema);

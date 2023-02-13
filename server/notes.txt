@@ -1,0 +1,30 @@
+SuperAdmin
+- Login/Logout
+- Add User
+- Edit User
+- Delete User
+- Fetch All Users
+- Approve/Reject Leave (Leave days will minus, Reset Leave Every Year)
+- View Performance Ratings (View Completed Form)
+- View OnBoarding Application Form (Employee Profile)
+- View Employee Benefits (Executive Benefit, refer PDF)
+- Change Employee Benefit Level
+
+Admin (For Respective Departments)
+- Login/Logout
+- Approve/Reject Leave (Leave days will minus, Reset Leave Every Year)
+- Add Performance Ratings (Fill in the Form)
+- View Performance Ratings (View Completed Form)
+- Edit Performance Ratings (Edit Completed Form)
+- Delete Performance Ratings (Delete Completed Form)
+- View OnBoarding Application Form (Employee Profile)
+- View Employee Benefits (Executive Benefit, refer PDF)
+
+Non-Admin
+- Login/Logout
+- Apply Leave (Leave days will minus)
+- View Performance Ratings (View Completed Form)
+- Input Project Code (Records working hours per day)
+- Add OnBoarding Application (Employee Profile)
+- Edit OnBoarding Application (Employee Profile)
+- View Employee Benefits (Executive Benefit, refer PDF)
