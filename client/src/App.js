@@ -2,6 +2,7 @@ import "./App.css";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "./partials/Login";
+import { Dashboard } from "./pages/Dashboard";
 import { Sidebar } from "./Sidebar";
 
 function App() {
@@ -10,9 +11,10 @@ function App() {
       <div className="w-1/12 h-screen bg-blue">
         <Sidebar />
       </div>
-      <div className="w-4/5">
+      <div className="w-full">
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="dashboard" element={<Dashboard />} />
         </Routes>
       </div>
     </div>
