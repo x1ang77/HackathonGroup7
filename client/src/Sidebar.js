@@ -1,14 +1,23 @@
+import { RxDashboard } from "react-icons/rx";
+import { FiUser } from "react-icons/fi";
+import { BiLogOut } from "react-icons/bi";
+import { BiCalendarCheck } from "react-icons/bi";
+import { RiHandCoinLine } from "react-icons/ri";
+import { NavLink } from "react-router-dom";
+
 export const Sidebar = () => {
   return (
-    <div className="grid grid-cols-1 content-between">
-      <div className="flex flex-col justify-center">
-        <svg viewBox="0 0 50 50" width="100%" height="100%" className="icon">
-          <path
-            d="M27.531 30h-8.062A2.472 2.472 0 0 1 17 27.531V17.469A2.472 2.472 0 0 1 19.469 15h8.062A2.472 2.472 0 0 1 30 17.469v10.062A2.472 2.472 0 0 1 27.531 30zm-8.062-13a.469.469 0 0 0-.469.469v10.062c0 .259.21.469.469.469h8.062c.259 0 .469-.21.469-.469V17.469a.469.469 0 0 0-.469-.469zM27.531 13h-8.062A2.472 2.472 0 0 1 17 10.531V4.469A2.472 2.472 0 0 1 19.469 2h8.062A2.472 2.472 0 0 1 30 4.469v6.062A2.472 2.472 0 0 1 27.531 13zm-8.062-9a.469.469 0 0 0-.469.469v6.062c0 .259.21.469.469.469h8.062c.259 0 .469-.21.469-.469V4.469A.469.469 0 0 0 27.531 4zM12.531 17H4.469A2.472 2.472 0 0 1 2 14.531V4.469A2.472 2.472 0 0 1 4.469 2h8.062A2.472 2.472 0 0 1 15 4.469v10.062A2.472 2.472 0 0 1 12.531 17zM4.469 4A.469.469 0 0 0 4 4.469v10.062c0 .259.21.469.469.469h8.062c.259 0 .469-.21.469-.469V4.469A.469.469 0 0 0 12.531 4zM12.531 30H4.469A2.472 2.472 0 0 1 2 27.531v-6.062A2.472 2.472 0 0 1 4.469 19h8.062A2.472 2.472 0 0 1 15 21.469v6.062A2.472 2.472 0 0 1 12.531 30zm-8.062-9a.469.469 0 0 0-.469.469v6.062c0 .259.21.469.469.469h8.062c.259 0 .469-.21.469-.469v-6.062a.469.469 0 0 0-.469-.469z"
-            data-original="#000000"
-            class=""
-          ></path>
-        </svg>
+    <div className="grid grid-cols-1 content-between h-screen">
+      <div className="flex flex-col mx-auto text-4xl text-white space-y-10 mt-20">
+        <NavLink to="dashboard">
+          <RxDashboard />
+        </NavLink>
+        <FiUser />
+        <BiCalendarCheck />
+        <RiHandCoinLine />
+      </div>
+      <div className="flex flex-col mx-auto text-4xl text-white space-y-10 mb-5">
+        <BiLogOut />
       </div>
     </div>
   );
