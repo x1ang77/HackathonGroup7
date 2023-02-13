@@ -95,14 +95,14 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-router.delete("/:id", auth, async (req, res) => {
-    try {
-    } catch (e) {
-        return res.status(400).json({
-            e,
-            message: "Cannot get user",
-        });
-    }
-});
+// router.delete("/:id", auth, async (req, res) => {
+//     try {
+//     } catch (e) {
+//         return res.status(400).json({
+//             e,
+//             message: "Cannot get user",
+//         });
+//     }
+// });
 
 module.exports = router;
