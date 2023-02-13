@@ -7,10 +7,10 @@ import { Sidebar } from "./Sidebar";
 function App() {
   return (
     <div className="h-screen w-full md:flex">
-      <div className="w-1/5 h-screen">
+      <div className="w-1/12 h-screen bg-blue">
         <Sidebar />
       </div>
-      <div>
+      <div className="w-4/5">
         <Routes>
           <Route path="/" element={<Login />} />
         </Routes>

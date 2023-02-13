@@ -6,6 +6,9 @@ module.exports = {
     "./node_modules/tw-elements/dist/js/**/*.js",
   ],
   theme: {
+    colors: {
+      blue: "#163E61",
+    },
     extend: {
       width: {
         "8xl": "96rem",
