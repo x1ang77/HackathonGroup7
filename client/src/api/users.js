@@ -41,7 +41,7 @@ export const register = async (user) => {
 };
 
 export const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.getItem("token") && localStorage.removeItem("token");
 };
 
 export const checkAuth = () => {

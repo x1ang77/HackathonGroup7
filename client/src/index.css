@@ -3,5 +3,18 @@
 @tailwind utilities;
 
 .icon {
-  fill: white;
+    fill: white;
+}
+
+/* .login {
+    clip-path: polygon(0 0, 82% 0, 59% 85%, 0% 100%);
+    background-color: rgba(226, 250, 255, 0.632);
+    z-index: auto;
+} */
+
+.background {
+    background-image: url(./images/bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
 }
