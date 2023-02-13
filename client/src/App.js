@@ -10,6 +10,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { checkAuth } from "./api/users";
 import jwtDecode from "jwt-decode";
+import { User } from "./pages/User";
+import { Application } from "./pages/Application";
 
 function App() {
     // const { isAuth, user } = checkAuth();
@@ -26,9 +28,11 @@ function App() {
             ) : (
                 <></>
             )}
-            <div className="w-full">
+            <div className="w-full h-full overflow-hidden">
                 <Routes>
                     <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="user" element={<User />} />
+                    <Route path="application" element={<Application />} />
                     <Route element={<GuestRoutes />}>
                         <Route path="/" element={<Login />} />
                     </Route>

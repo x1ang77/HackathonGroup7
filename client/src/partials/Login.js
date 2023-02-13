@@ -66,7 +66,7 @@ function Login() {
 
     return (
         <div className="background z-0">
-            <div class="bg-texture relative bg-purple-100 flex justify-center items-center bg-texture bg-cover py-28 sm:py-0">
+            <div class="bg-texture relative  flex justify-center items-center bg-texture bg-cover py-28 sm:py-0">
                 <div class="p-4 sm:p-8 flex-1 mt-5">
                     <div class="max-w-[420px] min-w-[320px] rounded-t-3xl mx-auto mt-32 ml-20">
                         <div class="px-10 pt-4 pb-8 rounded-3xl shadow-xl bg-white">
@@ -110,7 +110,7 @@ function Login() {
                                     >
                                         Password
                                     </label>
-                                    <span className="password-icon absolute right-2 top-1.25 bg-black">
+                                    <span className="password-icon absolute right-2 top-1.25 ">
                                         <img
                                             src={icon}
                                             alt="icon"

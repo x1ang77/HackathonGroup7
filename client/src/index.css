@@ -18,3 +18,7 @@
     background-size: cover;
     height: 100vh;
 }
+
+/* .sidebar:has(> .active) {
+  color: aquamarine;
+} */

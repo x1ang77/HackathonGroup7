@@ -15,8 +15,12 @@ export const Sidebar = () => {
                 <NavLink to="dashboard">
                     <RxDashboard />
                 </NavLink>
-                <FiUser />
-                <BiCalendarCheck />
+                <NavLink to="user">
+                    <FiUser />
+                </NavLink>
+                <NavLink to="application">
+                    <BiCalendarCheck />
+                </NavLink>
                 <RiHandCoinLine />
             </div>
             <div className="flex flex-col mx-auto text-4xl text-white space-y-10 mb-5">
