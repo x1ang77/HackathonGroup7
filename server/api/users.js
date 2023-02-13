@@ -33,6 +33,7 @@ router.post("/register", async (req, res) => {
         });
     }
 });
+
 router.post("/login", async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -86,6 +87,16 @@ router.get("/:id", async (req, res) => {
                 message: "No user found",
             });
         return res.json(user);
+    } catch (e) {
+        return res.status(400).json({
+            e,
+            message: "Cannot get user",
+        });
+    }
+});
+
+router.delete("/:id", auth, async (req, res) => {
+    try {
     } catch (e) {
         return res.status(400).json({
             e,

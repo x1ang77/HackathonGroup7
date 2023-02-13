@@ -10,6 +10,9 @@ const UserSchema = new mongoose.Schema({
     department: {
         type: String,
     },
+    executiveLevel: {
+        type: Number,
+    },
     isAdmin: {
         type: Boolean,
         default: false,
@@ -18,9 +21,6 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    exec: {
-        type: Number
-    }
 });
 
 module.exports = mongoose.model("user", UserSchema);
