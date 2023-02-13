@@ -17,6 +17,7 @@ app.use(
 app.use(express.static("public"));
 
 app.use("/users", require("./api/users"));
+app.use("/profiles", require("./api/profiles"));
 
 app.listen(PORT, () => console.log("Server is rolling on PORT" + PORT));
 mongoose.connection.once("open", () =>

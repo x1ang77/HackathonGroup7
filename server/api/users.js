@@ -7,7 +7,7 @@ const User = require("../models/User");
 require("dotenv").config();
 
 // super admin registers/create new user
-router.post("/register", async (req, res) => {
+router.post("/register", auth, async (req, res) => {
     try {
         const {
             name,
@@ -90,7 +90,7 @@ router.post("/login", async (req, res) => {
 });
 
 // fetches all users
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
     try {
         let users = await User.find({});
         if (!users.length) return res.json({ message: "No users found" });
@@ -104,7 +104,7 @@ router.get("/", async (req, res) => {
 });
 
 // admin can get/request a single user information
-router.get("/:id", async (req, res) => {
+router.get("/:id", auth, async (req, res) => {
     try {
         let user = await User.findById(req.params.id);
         if (!user)
