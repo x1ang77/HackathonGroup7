@@ -14,6 +14,9 @@ export const Dashboard = () => {
           <h1 className="font-bold">Welcome back Admin!</h1>
           <h1 className="text-sm text-gray">15 FEB 2023, Wednesday</h1>
         </div>
+        <div className="flex mx-5 grid content-center">
+          <FaUserCircle className="text-blue text-9xl" />
+        </div>
       </div>
     </div>
   );
