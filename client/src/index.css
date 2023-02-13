@@ -5,3 +5,7 @@
 .icon {
   fill: white;
 }
+
+/* .sidebar:has(> .active) {
+  color: aquamarine;
+} */
