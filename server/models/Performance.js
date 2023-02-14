@@ -20,4 +20,10 @@ const PerformanceSchema = new mongoose.Schema({
     attendance: {
         type: Number,
     },
+    isDone: {
+        type: Boolean,
+        default: false,
+    },
 });
+
+module.exports = mongoose.model("performance", PerformanceSchema);
