@@ -8,11 +8,13 @@ import { getAnnualLeaves } from "../api/leaves";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { getMedicalLeaves } from "../api/leaves";
+import { getAllUsers } from "../api/users";
 
 export const Dashboard2 = () => {
   const decoded = localStorage.getItem("token")
     ? jwtDecode(localStorage.getItem("token"))
     : null;
+  const { data: data4, isLoading4 } = useQuery("users", getAllUsers);
 
   const { data: data2, isLoading2 } = useQuery(
     ["annual", decoded.data._id],
@@ -23,13 +25,14 @@ export const Dashboard2 = () => {
     ["medical", decoded.data._id],
     () => getMedicalLeaves(decoded.data._id)
   );
+
   const { data, isLoading } = useQuery(["leaves", decoded.data._id], () =>
     getLeaveById(decoded.data._id)
   );
 
   let navigate = useNavigate();
 
-  if (isLoading || isLoading2 || isLoading3) {
+  if (isLoading || isLoading2 || isLoading3 || isLoading4) {
     return <h1>Loading...</h1>;
   }
   return (
@@ -81,7 +84,7 @@ export const Dashboard2 = () => {
             {data.length === 0 ? (
               <h2 className="text-center p-5">No Application</h2>
             ) : (
-              data.map((user) =>
+              data?.map((user) =>
                 user.pending !== 0 ? (
                   <div className="flex justify-between text-gray-700 text-base space-x-2 mt-2">
                     <div className="flex space-x-2">
@@ -103,15 +106,15 @@ export const Dashboard2 = () => {
         </div>
 
         <div className="flex mx-16 space-x-10">
-          <div className="block p-6 rounded-lg bg-white w-72 h-[22rem] grid content-between shadow-[0px_0px_20px_2px_rgba(0,0,0,0.3)]">
+          <div className="block p-6 rounded-lg bg-white w-64 h-[22rem] grid content-between shadow-[0px_0px_20px_2px_rgba(0,0,0,0.3)]">
             <div>
               <div className="flex">
                 <h5 className="text-blue font-bold mb-2 mr-12 mb-8">
                   Annual Leave Reminder
                 </h5>
               </div>
-              <div className="relative">
-                <img src={Donut} className="h-36 ml-12 mt-2 z-40" />
+              <div className="relative mb-2">
+                <img src={Donut} className="h-36 ml-8 z-40" />
                 <p className="absolute text-gray-700 text-base text-center text-xl z-0 top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-4">
                   Annual
                 </p>
@@ -119,15 +122,16 @@ export const Dashboard2 = () => {
                   Leave
                 </p>
               </div>
-              <div className="w-full border-b border-gray mt-4"></div>
-              <div className="mt-4">
-                {data2.length === 0 ? (
+              <div className="w-full border-b border-gray"></div>
+              <div className="mt-2">
+                <h1>Total: 12days</h1>
+                {data2?.length === 0 ? (
                   <h2 className="text-center p-5">No Application</h2>
                 ) : (
                   data2 && (
                     <div>
-                      <h1>Remainder: {12 - data2.length} days</h1>
-                      <h1>Used: {data2.length} days</h1>
+                      <h1>Remainder: {12 - data2?.length} days</h1>
+                      <h1>Used: {data2?.length} days</h1>
                     </div>
                   )
                 )}
@@ -137,15 +141,15 @@ export const Dashboard2 = () => {
         </div>
 
         <div className="flex mx-16 space-x-10">
-          <div className="block p-6 rounded-lg bg-white w-72 h-[22rem] grid content-between shadow-[0px_0px_20px_2px_rgba(0,0,0,0.3)]">
+          <div className="block p-6 rounded-lg bg-white w-64 h-[22rem] grid content-between shadow-[0px_0px_20px_2px_rgba(0,0,0,0.3)]">
             <div>
               <div className="flex">
                 <h5 className="text-blue font-bold mb-2 mr-12 mb-8">
                   Medical Leave Reminder
                 </h5>
               </div>
-              <div className="relative">
-                <img src={Donut} className="h-36 ml-12 mt-2 z-40" />
+              <div className="relative mb-2">
+                <img src={Donut} className="h-36 ml-8 z-40" />
                 <p className="absolute text-gray-700 text-base text-center text-xl z-0 top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-4">
                   Medical
                 </p>
@@ -153,19 +157,41 @@ export const Dashboard2 = () => {
                   Leave
                 </p>
               </div>
-              <div className="w-full border-b border-gray mt-4"></div>
-              <div className="mt-4">
-                {data3.length === 0 ? (
+              <div className="w-full border-b border-gray"></div>
+              <div className="mt-2">
+                <h1>Total: 12days</h1>
+                {data3?.length === 0 ? (
                   <h2 className="text-center p-5">No Application</h2>
                 ) : (
                   data3 && (
                     <div>
-                      <h1>Remainder: {6 - data3.length} days</h1>
-                      <h1>Used: {data3.length} days</h1>
+                      <h1>Remainder: {6 - data3?.length} days</h1>
+                      <h1>Used: {data3?.length} days</h1>
                     </div>
                   )
                 )}
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="block p-6 rounded-lg bg-white w-72 h-[22rem] grid content-between shadow-[0px_0px_20px_2px_rgba(0,0,0,0.3)]">
+          <div>
+            <h5 className="text-blue font-bold mb-2">
+              Employee Performance Scores
+            </h5>
+            <div className="w-full border-b-2 border-blue"></div>
+            <div className=" overflow-y-auto h-[15rem]">
+              {data4?.length === 0 ? (
+                <h2 className="text-center p-5">No Application</h2>
+              ) : (
+                data4?.map((user) => (
+                  <div className="flex justify-between text-gray-700 text-base space-x-2 mt-2">
+                    <h1 className="font-bold">{user.name}</h1>
+                    <h1>{user.totalPoints}</h1>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>
