@@ -12,46 +12,48 @@ import { checkAuth } from "./api/users";
 import jwtDecode from "jwt-decode";
 import { User } from "./pages/User";
 import { Application } from "./pages/Application";
+import { Personal } from "./pages/PersonalInfo";
 
 function App() {
-    // const { isAuth, user } = checkAuth();
-    const decoded = localStorage.getItem("token")
-        ? jwtDecode(localStorage.getItem("token"))
-        : null;
+  // const { isAuth, user } = checkAuth();
+  const decoded = localStorage.getItem("token")
+    ? jwtDecode(localStorage.getItem("token"))
+    : null;
 
-    return (
-        <div className="h-screen w-full md:flex">
-            {decoded ? (
-                <div className="w-1/12 h-screen bg-blue">
-                    <Sidebar />
-                </div>
-            ) : (
-                <></>
-            )}
-            <div className="w-full h-full overflow-hidden">
-                <Routes>
-                    <Route path="dashboard" element={<Dashboard />} />
-                    <Route path="user" element={<User />} />
-                    <Route path="application" element={<Application />} />
-                    <Route element={<GuestRoutes />}>
-                        <Route path="/" element={<Login />} />
-                    </Route>
-                </Routes>
-
-                <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                ></ToastContainer>
-            </div>
+  return (
+    <div className="h-screen w-full md:flex">
+      {decoded ? (
+        <div className="w-1/12 h-screen bg-blue">
+          <Sidebar />
         </div>
-    );
+      ) : (
+        <></>
+      )}
+      <div className="w-full h-full overflow-hidden">
+        <Routes>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="user" element={<User />} />
+          <Route path="application" element={<Application />} />
+          <Route path="personal" element={<Personal />} />
+          <Route element={<GuestRoutes />}>
+            <Route path="/" element={<Login />} />
+          </Route>
+        </Routes>
+
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        ></ToastContainer>
+      </div>
+    </div>
+  );
 }
 
 export default App;

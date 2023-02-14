@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { login } from "../api/users";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 import Logo from "../images/simple.png";
 import eyeOff from "../images/eye-off.svg";
 import eye from "../images/eye.svg";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 function Login() {
   let navigate = useNavigate();
@@ -141,6 +142,13 @@ function Login() {
                   Login
                 </button>
               </form>
+            </div>
+            <div className="flex justify-center mt-5">
+              <NavLink to="personal">
+                <h1 className="underline text-white flex items-center hover:text-blue">
+                  Fill up personal details <AiOutlineArrowRight />
+                </h1>
+              </NavLink>
             </div>
           </div>
         </div>

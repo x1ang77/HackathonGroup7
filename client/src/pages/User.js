@@ -1,17 +1,59 @@
+import { useState } from "react";
+import { register } from "../api/users";
+import { useMutation } from "react-query";
+import { toast } from "react-toastify";
+
 export const User = () => {
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+    name: "",
+    role: "",
+  });
+
+  const [error, setError] = useState();
+
+  const mutation = useMutation(async (user) => register(user), {
+    onSuccess: () => {
+      toast.success("Register successfully", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    },
+    onError: (error) => {
+      setError(error);
+    },
+  });
+
+  const onChangeHandler = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    mutation.mutate(user);
+  };
   return (
     <div>
       <div className="flex mx-16 mt-5">
         <h1 className="text-2xl text-blue font-bold">Manage User</h1>
       </div>
-      <form>
+      <form method="POST" onSubmit={onSubmitHandler}>
         <div className="flex space-x-10 mx-16 mt-2">
           <div class="relative z-0 mb-6 group w-[60%]">
             <input
               id="username"
+              name="username"
               class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
               required
+              onChange={onChangeHandler}
             />
             <label
               for="username"
@@ -23,9 +65,11 @@ export const User = () => {
           <div class="relative z-0 mb-6 group w-[60%]">
             <input
               id="password"
+              name="password"
               class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
               required
+              onChange={onChangeHandler}
             />
             <label
               for="password"
@@ -39,9 +83,11 @@ export const User = () => {
           <div class="relative z-0 mb-6 group w-[60%]">
             <input
               id="name"
+              name="name"
               class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
               required
+              onChange={onChangeHandler}
             />
             <label
               for="name"
@@ -53,41 +99,13 @@ export const User = () => {
           <div className=" w-[60%]">
             <select
               id="role"
+              name="role"
+              onChange={onChangeHandler}
               class="flex block w-full pb-6 text-sm text-gray-900 border-b-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
               <option selected>Select Role</option>
-              <option value="US">United States</option>
-              <option value="CA">Canada</option>
-              <option value="FR">France</option>
-              <option value="DE">Germany</option>
-            </select>
-          </div>
-        </div>
-        <div className="flex space-x-10 mx-16">
-          <div class="relative z-0 mb-6 group w-[60%]">
-            <input
-              id="executive"
-              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
-              required
-            />
-            <label
-              for="executive"
-              class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              Executive Level
-            </label>
-          </div>
-          <div className=" w-[60%]">
-            <select
-              id="department"
-              class="flex block w-full pb-6 text-sm text-gray-900 border-b-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-              <option selected>Select Department</option>
-              <option value="US">United States</option>
-              <option value="CA">Canada</option>
-              <option value="FR">France</option>
-              <option value="DE">Germany</option>
+              <option value="Admin">Admin</option>
+              <option value="nonAdmin">Non-Admin</option>
             </select>
           </div>
         </div>
@@ -115,10 +133,7 @@ export const User = () => {
                 Role
               </th>
               <th scope="col" class="px-6 py-3">
-                Department
-              </th>
-              <th scope="col" class="px-6 py-3">
-                <span class="sr-only">Edit</span>
+                Action
               </th>
             </tr>
           </thead>
@@ -132,8 +147,7 @@ export const User = () => {
               </th>
               <td class="px-6 py-4">John</td>
               <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4">Finance</td>
-              <td class="px-6 py-4 text-right space-x-5">
+              <td class="px-6 py-4 space-x-5">
                 <a href="#" class="font-medium text-sky-500 hover:underline">
                   Edit
                 </a>
@@ -151,8 +165,7 @@ export const User = () => {
               </th>
               <td class="px-6 py-4">John</td>
               <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4">Finance</td>
-              <td class="px-6 py-4 text-right space-x-5">
+              <td class="px-6 py-4 space-x-5">
                 <a href="#" class="font-medium text-sky-500 hover:underline">
                   Edit
                 </a>
@@ -170,8 +183,7 @@ export const User = () => {
               </th>
               <td class="px-6 py-4">John</td>
               <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4">Finance</td>
-              <td class="px-6 py-4 text-right space-x-5">
+              <td class="px-6 py-4 space-x-5">
                 <a href="#" class="font-medium text-sky-500 hover:underline">
                   Edit
                 </a>
@@ -189,8 +201,7 @@ export const User = () => {
               </th>
               <td class="px-6 py-4">John</td>
               <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4">Finance</td>
-              <td class="px-6 py-4 text-right space-x-5">
+              <td class="px-6 py-4 space-x-5">
                 <a href="#" class="font-medium text-sky-500 hover:underline">
                   Edit
                 </a>
@@ -208,8 +219,7 @@ export const User = () => {
               </th>
               <td class="px-6 py-4">John</td>
               <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4">Finance</td>
-              <td class="px-6 py-4 text-right space-x-5">
+              <td class="px-6 py-4 space-x-5">
                 <a href="#" class="font-medium text-sky-500 hover:underline">
                   Edit
                 </a>
@@ -227,8 +237,7 @@ export const User = () => {
               </th>
               <td class="px-6 py-4">John</td>
               <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4">Finance</td>
-              <td class="px-6 py-4 text-right space-x-5">
+              <td class="px-6 py-4 space-x-5">
                 <a href="#" class="font-medium text-sky-500 hover:underline">
                   Edit
                 </a>
@@ -246,8 +255,7 @@ export const User = () => {
               </th>
               <td class="px-6 py-4">John</td>
               <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4">Finance</td>
-              <td class="px-6 py-4 text-right space-x-5">
+              <td class="px-6 py-4 space-x-5">
                 <a href="#" class="font-medium text-sky-500 hover:underline">
                   Edit
                 </a>
@@ -265,8 +273,7 @@ export const User = () => {
               </th>
               <td class="px-6 py-4">John</td>
               <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4">Finance</td>
-              <td class="px-6 py-4 text-right space-x-5">
+              <td class="px-6 py-4 space-x-5">
                 <a href="#" class="font-medium text-sky-500 hover:underline">
                   Edit
                 </a>

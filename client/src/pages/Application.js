@@ -41,12 +41,166 @@ export const Application = () => {
             placeholder="Write your thoughts here..."
           ></textarea>
         </div>
-        <div className="flex justify-end mx-16">
+        <div className="flex justify-end mx-16 mt-5">
           <button className="bg-blue text-white py-1.5 px-8 rounded-2xl">
-            Register
+            Apply
           </button>
         </div>
       </form>
+
+      <div className="mx-16 flex justify-between mt-5 mb-2">
+        <h1 className="font-bold">Pending Application</h1>
+        <h1 className="text-blue font-bold">8 Pending</h1>
+      </div>
+      <div class="relative overflow-x-auto mx-16 max-h-[22rem]">
+        <table class="w-full text-sm text-left text-gray-500">
+          <thead class="text-xs text-gray-700 uppercase bg-sky-100 sticky top-0">
+            <tr>
+              <th scope="col" class="px-6 py-3">
+                Username
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Name
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Leave Application
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody className=" overflow-y-auto">
+            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-100">
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                simplr001
+              </th>
+              <td class="px-6 py-4">John</td>
+              <td class="px-6 py-4">Medical Leave</td>
+              <td class="px-6 py-4 space-x-5">
+                <a href="#" class="font-medium text-sky-500 hover:underline">
+                  Approve
+                </a>
+                <a href="#" class="font-medium text-red-500 hover:underline">
+                  Reject
+                </a>
+              </td>
+            </tr>
+            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-100">
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                simplr001
+              </th>
+              <td class="px-6 py-4">John</td>
+              <td class="px-6 py-4">Medical Leave</td>
+              <td class="px-6 py-4 space-x-5">
+                <a href="#" class="font-medium text-sky-500 hover:underline">
+                  Approve
+                </a>
+                <a href="#" class="font-medium text-red-500 hover:underline">
+                  Reject
+                </a>
+              </td>
+            </tr>
+            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-100">
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                simplr001
+              </th>
+              <td class="px-6 py-4">John</td>
+              <td class="px-6 py-4">Medical Leave</td>
+              <td class="px-6 py-4 space-x-5">
+                <a href="#" class="font-medium text-sky-500 hover:underline">
+                  Approve
+                </a>
+                <a href="#" class="font-medium text-red-500 hover:underline">
+                  Reject
+                </a>
+              </td>
+            </tr>
+            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-100">
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                simplr001
+              </th>
+              <td class="px-6 py-4">John</td>
+              <td class="px-6 py-4">Medical Leave</td>
+              <td class="px-6 py-4 space-x-5">
+                <a href="#" class="font-medium text-sky-500 hover:underline">
+                  Approve
+                </a>
+                <a href="#" class="font-medium text-red-500 hover:underline">
+                  Reject
+                </a>
+              </td>
+            </tr>
+            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-100">
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                simplr001
+              </th>
+              <td class="px-6 py-4">John</td>
+              <td class="px-6 py-4">Medical Leave</td>
+              <td class="px-6 py-4 space-x-5">
+                <a href="#" class="font-medium text-sky-500 hover:underline">
+                  Approve
+                </a>
+                <a href="#" class="font-medium text-red-500 hover:underline">
+                  Reject
+                </a>
+              </td>
+            </tr>
+            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-100">
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                simplr001
+              </th>
+              <td class="px-6 py-4">John</td>
+              <td class="px-6 py-4">Medical Leave</td>
+              <td class="px-6 py-4 space-x-5">
+                <a href="#" class="font-medium text-sky-500 hover:underline">
+                  Approve
+                </a>
+                <a href="#" class="font-medium text-red-500 hover:underline">
+                  Reject
+                </a>
+              </td>
+            </tr>
+            value{" "}
+            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-100">
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                simplr001
+              </th>
+              <td class="px-6 py-4">John</td>
+              <td class="px-6 py-4">Medical Leave</td>
+              <td class="px-6 py-4 space-x-5">
+                <a href="#" class="font-medium text-sky-500 hover:underline">
+                  Approve
+                </a>
+                <a href="#" class="font-medium text-red-500 hover:underline">
+                  Reject
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
