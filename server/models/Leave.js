@@ -14,8 +14,16 @@ const LeaveSchema = new mongoose.Schema({
   typeOfLeave: {
     type: String,
   },
+  details: {
+    type: String,
+  },
   slip: {
     type: String,
+    default: null,
+  },
+  pending: {
+    type: Boolean,
+    default: false,
   },
 });
 
