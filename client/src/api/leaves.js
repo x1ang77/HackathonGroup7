@@ -57,8 +57,22 @@ export const applyLeave = async (leave, image) => {
     }
 };
 
-export const updateLeave = async () => {
+export const updateLeave = async (id, value) => {
     try {
+        const res = await fetch(
+            `${process.env.REACT_APP_API_SERVER}/leaves/${id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-auth-token": localStorage.getItem("token"),
+                },
+                body: JSON.stringify(value),
+            }
+        );
+        const data = await res.json();
+        if (res.ok) return data;
+        if (!res.ok) throw new Error(data.message);
     } catch (e) {
         throw e.message;
     }
