@@ -10,60 +10,66 @@ import { logout } from "./api/users";
 import jwtDecode from "jwt-decode";
 
 export const Sidebar = () => {
-    const decoded = localStorage.getItem("token")
-        ? jwtDecode(localStorage.getItem("token"))
-        : null;
+  const decoded = localStorage.getItem("token")
+    ? jwtDecode(localStorage.getItem("token"))
+    : null;
 
-    let navigate = useNavigate();
-    var dec = jwtDecode(localStorage.getItem("token"));
-    return (
-        <>
-            {decoded && (
-                <div className="grid grid-cols-1 content-between h-screen">
-                    <div className="flex flex-col mx-auto text-4xl text-white space-y-10 mt-20">
-                        {!decoded.data.isAdmin ? (
-                            <NavLink to="dashboard2">
-                                <RxDashboard />
-                            </NavLink>
-                        ) : (
-                            <NavLink to="dashboard">
-                                <RxDashboard />
-                            </NavLink>
-                        )}
-                        {dec.data.isAdmin ? (
-                            <>
-                                <NavLink to="user">
-                                    <FiUsers />
-                                </NavLink>{" "}
-                            </>
-                        ) : (
-                            <></>
-                        )}
-
-                        <NavLink to="application">
-                            <BiCalendarCheck />
-                        </NavLink>
-                        <NavLink to="profile">
-                            <FiUser />
-                        </NavLink>
-                        <NavLink to="review">
-                            <RiHandCoinLine />
-                        </NavLink>
-                    </div>
-                    <div className="flex flex-col mx-auto text-4xl text-white space-y-10 mb-5">
-                        <button
-                            onClick={() => {
-                                localStorage.removeItem("username");
-                                logout();
-                                navigate("/");
-                                window.location.reload();
-                            }}
-                        >
-                            <BiLogOut />
-                        </button>
-                    </div>
-                </div>
+  let navigate = useNavigate();
+  var dec = jwtDecode(localStorage.getItem("token"));
+  return (
+    <>
+      {decoded && (
+        <div className="grid grid-cols-1 content-between h-screen">
+          <div className="flex flex-col mx-auto text-4xl text-white space-y-10 mt-20">
+            {!decoded.data.isAdmin ? (
+              <NavLink to="dashboard2">
+                <RxDashboard />
+              </NavLink>
+            ) : (
+              <NavLink to="dashboard">
+                <RxDashboard />
+              </NavLink>
             )}
-        </>
-    );
+            {dec.data.isAdmin ? (
+              <>
+                <NavLink to="user">
+                  <FiUsers />
+                </NavLink>{" "}
+              </>
+            ) : (
+              <></>
+            )}
+
+            <NavLink to="application">
+              <BiCalendarCheck />
+            </NavLink>
+            <NavLink to="profile">
+              <FiUser />
+            </NavLink>
+            {dec.data.isAdmin ? (
+              <>
+                <NavLink to="review">
+                  <RiHandCoinLine />
+                </NavLink>{" "}
+              </>
+            ) : (
+              <></>
+            )}
+          </div>
+          <div className="flex flex-col mx-auto text-4xl text-white space-y-10 mb-5">
+            <button
+              onClick={() => {
+                localStorage.removeItem("username");
+                logout();
+                navigate("/");
+                window.location.reload();
+              }}
+            >
+              <BiLogOut />
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
 };

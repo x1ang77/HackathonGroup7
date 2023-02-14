@@ -51,10 +51,10 @@ export const Dashboard = () => {
             <h5 className="text-blue font-bold mb-2">Pending Applications</h5>
             <div className="w-full border-b-2 border-blue"></div>
             <div className=" overflow-y-auto h-[15rem]">
-              {data.length === 0 ? (
+              {data?.length === 0 ? (
                 <h2 className="text-center p-5">No Application</h2>
               ) : (
-                data.map((user) =>
+                data?.map((user) =>
                   user.pending === 0 ? (
                     <div className="flex text-gray-700 text-base space-x-2 mt-2">
                       <h1 className="font-bold">{user.name}:</h1>
@@ -80,10 +80,10 @@ export const Dashboard = () => {
             </h5>
             <div className="w-full border-b-2 border-blue"></div>
             <div className=" overflow-y-auto h-[15rem]">
-              {data2.length === 0 ? (
+              {data2?.length === 0 ? (
                 <h2 className="text-center p-5">No Application</h2>
               ) : (
-                data2.map((user) => (
+                data2?.map((user) => (
                   <div className="flex justify-between text-gray-700 text-base space-x-2 mt-2">
                     <h1 className="font-bold">{user.name}</h1>
                     <h1>{user.totalPoints}</h1>
@@ -101,7 +101,7 @@ export const Dashboard = () => {
                 <h1 className="text-2xl text-blue">Users</h1>
               </div>
               <h1 className="text-3xl text-sky-500">
-                {data2.length === 0 ? 0 : data2?.length}
+                {data2?.length === 0 ? 0 : data2?.length}
               </h1>
             </div>
           </div>
