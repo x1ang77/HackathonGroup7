@@ -57,6 +57,9 @@ router.post("/", auth, async (req, res) => {
             let rawData = fs.readFileSync(oldPath);
             fs.writeFileSync(newPath, rawData);
             leave.image = `/${files.image.newFilename}-${files.image.originalFilename}`;
+            leave.userId = req.user._id;
+            leave.name = req.user.name;
+            leave.username = req.user.username;
             leave.save();
 
             return res.status(200).json({
@@ -68,6 +71,16 @@ router.post("/", auth, async (req, res) => {
         return res.status(400).json({
             e,
             message: "Cannot add leave",
+        });
+    }
+});
+
+router.put("/:id", auth, async (req, res) => {
+    try {
+    } catch (e) {
+        return res.status(400).json({
+            e,
+            message: "Cannot edit leave",
         });
     }
 });
