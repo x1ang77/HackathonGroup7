@@ -20,7 +20,7 @@ export const ratePerformance = async (ratings, id) => {
     }
 };
 
-export const performanceScore = async (id) => {
+export const getScoreById = async (id) => {
     try {
         const res = await fetch(
             `${process.env.REACT_APP_API_SERVER}/performance/${id}`,
@@ -32,6 +32,7 @@ export const performanceScore = async (id) => {
             }
         );
         const data = await res.json();
+        console.log(data);
         if (res.ok) return data;
         if (!res.ok) throw new Error(data.message);
     } catch (e) {

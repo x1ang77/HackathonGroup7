@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 const { trusted } = require("mongoose");
 const Performance = require("../models/Performance");
+const User = require("../models/User");
 require("dotenv").config();
 
 router.post("/:id", auth, async (req, res) => {
@@ -19,6 +20,8 @@ router.post("/:id", auth, async (req, res) => {
             attendance,
         } = req.body;
 
+        const user = await User.findById(req.params.id);
+        user.isReview = true;
         const performance = new Performance({
             userId: userId,
             productivity,
@@ -26,8 +29,8 @@ router.post("/:id", auth, async (req, res) => {
             workConsistency,
             communication,
             attendance,
-            isDone: true,
         });
+        user.save();
         performance.save();
         return res.json({
             performance,
@@ -41,7 +44,7 @@ router.post("/:id", auth, async (req, res) => {
     }
 });
 
-router.get("/:id", auth, async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
         const performance = await Performance.find({
             userId: req.params.id,

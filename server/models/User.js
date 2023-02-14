@@ -24,6 +24,10 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    isReview: {
+        type: Boolean,
+        default: false,
+    },
     annualLeave: {
         type: Number,
         default: 12,
