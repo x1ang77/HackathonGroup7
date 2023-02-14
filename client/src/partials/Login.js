@@ -143,13 +143,6 @@ function Login() {
                 </button>
               </form>
             </div>
-            <div className="flex justify-center mt-5">
-              <NavLink to="personal">
-                <h1 className="underline text-white flex items-center hover:text-blue">
-                  Fill up personal details <AiOutlineArrowRight />
-                </h1>
-              </NavLink>
-            </div>
           </div>
         </div>
       </div>
