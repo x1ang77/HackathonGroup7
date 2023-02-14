@@ -84,6 +84,15 @@ router.put("/:id", auth, async (req, res) => {
             req.body,
             { new: true }
         );
+
+        if (req.body == 1 && leave.typeOfLeave == "annualLeave") {
+            const user = await User.findById(leave.userId);
+            console.log({ user, message: "annual leave" });
+        }
+        if (req.body == 1 && leave.typeOfLeave == "medicalLeave") {
+            const user = await User.findById(leave.userId);
+            console.log({ user, message: "medical leave" });
+        }
         return res.json({
             editLeave,
             message: "Leave application processed successfully",
