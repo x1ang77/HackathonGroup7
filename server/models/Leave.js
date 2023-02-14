@@ -22,8 +22,8 @@ const LeaveSchema = new mongoose.Schema({
         default: null,
     },
     pending: {
-        type: Boolean,
-        default: false,
+        type: Number,
+        default: 0,
     },
     date: {
         type: String,

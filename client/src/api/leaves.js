@@ -31,16 +31,15 @@ export const getLeaveById = async (id) => {
     }
 };
 
-export const applyLeave = async (user, leave, image) => {
+export const applyLeave = async (leave, image) => {
     try {
         const formData = new FormData();
-        formData.append("userId", user._id);
-        formData.append("name", user.name);
-        formData.append("username", user.username);
         formData.append("typeOfLeave", leave.typeOfLeave);
         formData.append("details", leave.details);
         formData.append("date", leave.date);
-        formData.append("image", image);
+        if (image) {
+            formData.append("image", image);
+        }
 
         const res = await fetch(`${process.env.REACT_APP_API_SERVER}/leaves`, {
             method: "POST",
@@ -53,6 +52,13 @@ export const applyLeave = async (user, leave, image) => {
         const data = await res.json();
         if (res.ok) return data;
         if (!res.ok) throw new Error(data.message);
+    } catch (e) {
+        throw e.message;
+    }
+};
+
+export const updateLeave = async () => {
+    try {
     } catch (e) {
         throw e.message;
     }
