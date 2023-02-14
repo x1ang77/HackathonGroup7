@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .icon {
-    fill: white;
+  fill: white;
 }
 
 /* .login {
@@ -13,22 +13,24 @@
 } */
 
 .background {
-    background-image: url(./images/bg.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
+  background-image: url(./images/bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
 }
 
 /* .sidebar:has(> .active) {
   color: aquamarine;
 } */
-
+.active {
+  color: #38bdf8;
+}
 .animate-pulse {
-    animation: pulse 4s infinite;
+  animation: pulse 4s infinite;
 }
 
 .password-icon {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* @keyframes pulse {

@@ -41,10 +41,11 @@ export const applyLeave = async (leave, image) => {
             formData.append("image", image);
         }
 
+        console.log(formData);
         const res = await fetch(`${process.env.REACT_APP_API_SERVER}/leaves`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                // "Content-Type": "application/json",
                 "x-auth-token": localStorage.getItem("token"),
             },
             body: formData,

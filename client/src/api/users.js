@@ -57,6 +57,7 @@ export const getUsersbyId = async (id) => {
       method: "GET",
     });
     const data = await res.json();
+    console.log(id);
     if (res.ok) {
       return data;
     } else {
