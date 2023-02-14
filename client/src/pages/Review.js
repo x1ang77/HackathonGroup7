@@ -17,7 +17,7 @@ export const Review = () => {
           <h1 className="font-bold">User List</h1>
           <h1 className="text-blue font-bold">{data.length} User</h1>
         </div>
-        <div class="relative overflow-x-auto mx-16 max-h-[22rem]">
+        <div class="relative overflow-x-auto mx-16 ">
           <table class="w-full text-sm text-left text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-sky-100 sticky top-0">
               <tr>
