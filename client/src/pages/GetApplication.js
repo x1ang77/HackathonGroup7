@@ -3,7 +3,7 @@ import { updateLeave } from "../api/leaves";
 import { useQueryClient, useMutation } from "react-query";
 
 function GetApplication({
-  data: { username, name, typeOfLeave, details, image, pending, _id },
+  data: { username, name, typeOfLeave, details, image, pending, _id, date },
 }) {
   const queryClient = useQueryClient();
 
@@ -34,6 +34,7 @@ function GetApplication({
             </th>
             <td class="px-6 py-4">{name}</td>
             <td class="px-6 py-4">{typeOfLeave}</td>
+            <td class="px-6 py-4">{date}</td>
             <td class="px-6 py-4 space-x-5">
               <button
                 value={1}
@@ -89,6 +90,9 @@ function GetApplication({
                       ></button>
                     </div>
                     <div class="modal-body relative p-4">
+                      <div className="flex justify-end">
+                        <h1 className="font-bold text-blue">{date}</h1>
+                      </div>
                       <div className="flex text-xl mb-3">
                         <h1 className="font-bold">Details: </h1>
                         <h1>{details}</h1>

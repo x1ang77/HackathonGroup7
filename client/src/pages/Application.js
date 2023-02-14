@@ -86,8 +86,8 @@ export const Application = () => {
               onChange={onChangeHandler}
             >
               <option selected>Type of Leave</option>
-              <option value="annualLeave">Annual Leave</option>
-              <option value="medicalLeave">Medical Leave</option>
+              <option value="Annual Leave">Annual Leave</option>
+              <option value="Medical Leave">Medical Leave</option>
             </select>
           </div>
           <div class="relative z-0 mb-6 group w-[60%]">
@@ -160,6 +160,9 @@ export const Application = () => {
               </th>
               <th scope="col" class="px-6 py-3">
                 Leave Application
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Date
               </th>
               <th scope="col" class="px-6 py-3">
                 Action
