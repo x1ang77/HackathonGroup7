@@ -5,6 +5,8 @@ import { useMutation, useQueryClient, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { getLeaves } from "../api/leaves";
 import GetApplication from "./GetApplication";
+import { Approved } from "./Approved";
+import { Rejected } from "./Rejected";
 
 export const Application = () => {
   const navigate = useNavigate();
@@ -15,7 +17,7 @@ export const Application = () => {
   });
   const [image, setImage] = useState();
   const { data, isLoading } = useQuery("leaves", getLeaves);
-  console.log(data);
+
   const queryClient = useQueryClient();
   const mutation = useMutation(({ leave, image }) => applyLeave(leave, image), {
     onSuccess: () => {
@@ -141,6 +143,10 @@ export const Application = () => {
 
       <div className="mx-16 flex justify-between mt-5 mb-2">
         <h1 className="font-bold">Pending Application</h1>
+        <div>
+          <Rejected data={data} />
+          <Approved data={data} />
+        </div>
       </div>
       <div class="relative overflow-x-auto mx-16 max-h-[22rem]">
         <table class="w-full text-sm text-left text-gray-500">

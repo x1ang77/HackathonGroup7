@@ -1,7 +1,6 @@
 import { GrFormView } from "react-icons/gr";
 import { updateLeave } from "../api/leaves";
 import { useQueryClient, useMutation } from "react-query";
-import { useState } from "react";
 
 function GetApplication({
   data: { username, name, typeOfLeave, details, image, pending, _id },
@@ -54,13 +53,56 @@ function GetApplication({
               </button>
             </td>
             <td class="px-6 py-4 space-x-5">
-              <a
-                href="#"
-                class="font-medium text-blue hover:underline flex items-center"
+              <button
+                type="button"
+                class="flex items-center px-6 py-2.5 font-medium text-xs leading-tight hover:underline uppercase focus:bg-blue-700 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                data-bs-toggle="modal"
+                data-bs-target={`#modal${_id}`}
               >
                 View
                 <GrFormView className="text-2xl" />
-              </a>
+              </button>
+
+              <div
+                class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+                id={`modal${_id}`}
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog relative w-auto pointer-events-none">
+                  <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                    <div class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                      <h5
+                        class="text-xl font-medium leading-normal text-gray-800"
+                        id="exampleModalLabel"
+                      >
+                        {name}
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body relative p-4">
+                      <div className="flex text-xl mb-3">
+                        <h1 className="font-bold">Details: </h1>
+                        <h1>{details}</h1>
+                      </div>
+                      <h1 className="font-bold text-xl">Attached Slip: </h1>
+                      <img
+                        src={process.env.REACT_APP_API_SERVER + image}
+                        className="w-96"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
         </tbody>
