@@ -14,8 +14,6 @@ export const Sidebar = () => {
         ? jwtDecode(localStorage.getItem("token"))
         : null;
 
-    console.log(decoded.data.isAdmin);
-
     let navigate = useNavigate();
     var dec = jwtDecode(localStorage.getItem("token"));
     return (

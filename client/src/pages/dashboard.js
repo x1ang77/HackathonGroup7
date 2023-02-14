@@ -9,7 +9,10 @@ export const Dashboard = () => {
     const { data, isLoading } = useQuery("leaves", getLeaves);
     const { data: data2, isLoading2 } = useQuery("users", getAllUsers);
 
-    if (isLoading || isLoading2) {
+    if (isLoading) {
+        return <h1>Loading...</h1>;
+    }
+    if (isLoading2) {
         return <h1>Loading...</h1>;
     }
     return (
@@ -40,7 +43,6 @@ export const Dashboard = () => {
                     </div>
                 </div>
             </div>
-
             <div className="flex mx-16 mt-5 space-x-10">
                 <div className="block p-6 rounded-lg bg-white w-72 h-[22rem] grid content-between shadow-[0px_0px_20px_2px_rgba(0,0,0,0.3)]">
                     <div>
@@ -49,22 +51,18 @@ export const Dashboard = () => {
                         </h5>
                         <div className="w-full border-b-2 border-blue"></div>
                         <div className=" overflow-y-auto h-[15rem]">
-                            {data.length === 0 ? (
-                                <h2 className="text-center p-5">
-                                    No Application
-                                </h2>
-                            ) : (
-                                data.map((user) =>
-                                    user.pending == 0 ? (
-                                        <div className="flex text-gray-700 text-base space-x-2 mt-2">
-                                            <h1 className="font-bold">
-                                                {user.name}:
-                                            </h1>
-                                            <h1>{user.typeOfLeave}</h1>
-                                        </div>
-                                    ) : null
-                                )
-                            )}
+                            {/* {data.length === 0 ? (
+                <h2 className="text-center p-5">No Application</h2>
+              ) : (
+                data.map((user) =>
+                  user.pending == 0 ? (
+                    <div className="flex text-gray-700 text-base space-x-2 mt-2">
+                      <h1 className="font-bold">{user.name}:</h1>
+                      <h1>{user.typeOfLeave}</h1>
+                    </div>
+                  ) : null
+                )
+              )} */}
                         </div>
                     </div>
                     <div>
@@ -75,7 +73,6 @@ export const Dashboard = () => {
                         </Link>
                     </div>
                 </div>
-
                 <div className="space-y-5">
                     <div className="block rounded-lg bg-white w-72 h-20 grid content-between shadow-[0px_0px_20px_2px_rgba(0,0,0,0.3)]">
                         <div className="flex items-center p-5 h-20">
@@ -84,7 +81,7 @@ export const Dashboard = () => {
                                 <h1 className="text-2xl text-blue">Users</h1>
                             </div>
                             <h1 className="text-3xl text-sky-500">
-                                {data2.length}
+                                {data.length === 0 ? 0 : data2?.length}
                             </h1>
                         </div>
                     </div>
