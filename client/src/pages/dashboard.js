@@ -9,7 +9,10 @@ export const Dashboard = () => {
   const { data, isLoading } = useQuery("leaves", getLeaves);
   const { data: data2, isLoading2 } = useQuery("users", getAllUsers);
 
-  if (isLoading || isLoading2) {
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+  if (isLoading2) {
     return <h1>Loading...</h1>;
   }
   return (
@@ -45,7 +48,7 @@ export const Dashboard = () => {
             <h5 className="text-blue font-bold mb-2">Pending Applications</h5>
             <div className="w-full border-b-2 border-blue"></div>
             <div className=" overflow-y-auto h-[15rem]">
-              {data.length === 0 ? (
+              {/* {data.length === 0 ? (
                 <h2 className="text-center p-5">No Application</h2>
               ) : (
                 data.map((user) =>
@@ -56,7 +59,7 @@ export const Dashboard = () => {
                     </div>
                   ) : null
                 )
-              )}
+              )} */}
             </div>
           </div>
           <div>
@@ -75,7 +78,9 @@ export const Dashboard = () => {
                 <FaUsers className="text-blue text-5xl self-center" />
                 <h1 className="text-2xl text-blue">Users</h1>
               </div>
-              <h1 className="text-3xl text-sky-500">{data2.length}</h1>
+              <h1 className="text-3xl text-sky-500">
+                {data.length === 0 ? 0 : data2?.length}
+              </h1>
             </div>
           </div>
         </div>
