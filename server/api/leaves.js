@@ -77,6 +77,17 @@ router.post("/", auth, async (req, res) => {
 
 router.put("/:id", auth, async (req, res) => {
     try {
+        const leave = await Leave.findById(req.params.id);
+        if (!leave) return res.status(400).json({ message: "Leave not found" });
+        const editLeave = await Leave.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+        );
+        return res.json({
+            editLeave,
+            message: "Leave application processed successfully",
+        });
     } catch (e) {
         return res.status(400).json({
             e,
