@@ -135,6 +135,8 @@ router.put("/:id", auth, async (req, res) => {
     let user = await User.findById(req.params.id);
     if (!user) return res.json({ message: "User does not exist" });
     user = await User.findByIdAndUpdate(req.params.id, req.body);
+
+    
     return res.json({
       user,
       message: "Successfully updated user",

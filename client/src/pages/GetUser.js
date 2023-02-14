@@ -1,6 +1,6 @@
 import React from "react";
 
-function GetReviewUsers({ data: { username, name, isAdmin } }) {
+function GetUsers({ data: { username, name, isAdmin } }) {
   return (
     <>
       <tbody className=" overflow-y-auto">
@@ -32,4 +32,4 @@ function GetReviewUsers({ data: { username, name, isAdmin } }) {
   );
 }
 
-export default GetReviewUsers;
+export default GetUsers;

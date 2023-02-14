@@ -1,10 +1,63 @@
 import { useParams } from "react-router-dom";
 import { getUsersbyId } from "../api/users";
 import { useQuery } from "react-query";
+import { useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { ratePerformance } from "../api/performance";
+import { toast } from "react-toastify";
+
 export const ReviewById = () => {
   const { id } = useParams();
+
   const { data, isLoading } = useQuery(["user", id], () => getUsersbyId(id));
-  console.log(data);
+
+  const [review, setReview] = useState({
+    productivity: "",
+    playAboveTheLine: "",
+    workConsistency: "",
+    communication: "",
+    attendance: "",
+  });
+  //   console.log(review);
+
+  const queryClient = useQueryClient();
+
+  const [error, setError] = useState();
+
+  const mutation = useMutation(
+    async ({ review, id }) => {
+      ratePerformance(review, id);
+    },
+    {
+      onSuccess: () => {
+        //   queryClient.invalidateQueries(["users"]);
+        toast.success("Rating successfully", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      },
+      onError: (error) => {
+        setError(error);
+      },
+    }
+  );
+
+  const onChangeHandler = (e) => {
+    console.log(e.target.value);
+    setReview({ ...review, [e.target.name]: e.target.value });
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    mutation.mutate({ review, id });
+  };
+
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
@@ -24,243 +77,255 @@ export const ReviewById = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center mt-28">
-          <div class="relative mx-16 w-[60rem]">
-            <table class="w-full text-sm text-left text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase sticky top-0 border-b-2">
-                <tr>
-                  <th scope="col" class="px-6 py-3">
-                    Performance
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Poor
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Good
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Excellent
-                  </th>
-                </tr>
-              </thead>
-              <tbody className=" overflow-y-auto">
-                <tr class="bg-white">
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    Productivity
-                  </th>
-                  <td>
-                    <div class="flex items-center px-6">
-                      <input
-                        id="one-1"
-                        type="radio"
-                        value=""
-                        name="one"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="flex items-center px-6">
-                      <input
-                        checked
-                        id="one-2"
-                        type="radio"
-                        value=""
-                        name="one"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="flex items-center px-6">
-                      <input
-                        checked
-                        id="one-3"
-                        type="radio"
-                        value=""
-                        name="one"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr class="bg-slate-300">
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    Play Above The Line
-                  </th>
-                  <td>
-                    <div class="flex items-center px-6">
-                      <input
-                        id="two-1"
-                        type="radio"
-                        value=""
-                        name="two"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="flex items-center px-6">
-                      <input
-                        checked
-                        id="two-2"
-                        type="radio"
-                        value=""
-                        name="two"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="flex items-center px-6">
-                      <input
-                        checked
-                        id="two-3"
-                        type="radio"
-                        value=""
-                        name="two"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr class="bg-white">
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    Work Consistency
-                  </th>
-                  <td>
-                    <div class="flex items-center px-6">
-                      <input
-                        id="three-1"
-                        type="radio"
-                        value=""
-                        name="three"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="flex items-center px-6">
-                      <input
-                        checked
-                        id="three-2"
-                        type="radio"
-                        value=""
-                        name="three"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="flex items-center px-6">
-                      <input
-                        checked
-                        id="three-3"
-                        type="radio"
-                        value=""
-                        name="three"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr class="bg-slate-300">
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    Communication
-                  </th>
-                  <td>
-                    <div class="flex items-center px-6">
-                      <input
-                        id="four-1"
-                        type="radio"
-                        value=""
-                        name="four"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="flex items-center px-6">
-                      <input
-                        checked
-                        id="four-2"
-                        type="radio"
-                        value=""
-                        name="four"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="flex items-center px-6">
-                      <input
-                        checked
-                        id="four-3"
-                        type="radio"
-                        value=""
-                        name="four"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr class="bg-white">
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    Attendance
-                  </th>
-                  <td>
-                    <div class="flex items-center px-6">
-                      <input
-                        id="five-1"
-                        type="radio"
-                        value=""
-                        name="five"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="flex items-center px-6">
-                      <input
-                        checked
-                        id="five-2"
-                        type="radio"
-                        value=""
-                        name="five"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="flex items-center px-6">
-                      <input
-                        checked
-                        id="five-3"
-                        type="radio"
-                        value=""
-                        name="five"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        <div className="flex justify-center mt-28 ">
+          <div class="relative mx-16 w-[60rem]  rounded-2xl shadow-2xl p-5">
+            <form method="POST" onSubmit={onSubmitHandler}>
+              <table class="w-full text-sm text-left text-gray-500 ">
+                <thead class="text-xs text-gray-700 uppercase sticky top-0 border-b-2">
+                  <tr>
+                    <th scope="col" class="px-6 py-3">
+                      Performance
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-red-500">
+                      Poor
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-sky-500">
+                      Good
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-green-500">
+                      Excellent
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className=" overflow-y-auto">
+                  <tr class="bg-white">
+                    <th
+                      scope="row"
+                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      Productivity
+                    </th>
+                    <td>
+                      <div class="flex items-center px-6">
+                        <input
+                          id="productivity-1"
+                          type="radio"
+                          value="1"
+                          name="productivity"
+                          onChange={onChangeHandler}
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex items-center px-6">
+                        <input
+                          id="productivity-2"
+                          type="radio"
+                          value="2"
+                          name="productivity"
+                          onChange={onChangeHandler}
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex items-center px-6">
+                        <input
+                          id="productivity-3"
+                          type="radio"
+                          value="3"
+                          name="productivity"
+                          onChange={onChangeHandler}
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="bg-slate-300">
+                    <th
+                      scope="row"
+                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      Play Above The Line
+                    </th>
+                    <td>
+                      <div class="flex items-center px-6">
+                        <input
+                          id="playAboveTheLine-1"
+                          type="radio"
+                          value="1"
+                          name="playAboveTheLine"
+                          onChange={onChangeHandler}
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex items-center px-6">
+                        <input
+                          id="playAboveTheLine-2"
+                          type="radio"
+                          value="2"
+                          name="playAboveTheLine"
+                          onChange={onChangeHandler}
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex items-center px-6">
+                        <input
+                          id="playAboveTheLine-3"
+                          type="radio"
+                          value="3"
+                          name="playAboveTheLine"
+                          onChange={onChangeHandler}
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="bg-white">
+                    <th
+                      scope="row"
+                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      Work Consistency
+                    </th>
+                    <td>
+                      <div class="flex items-center px-6">
+                        <input
+                          id="workConsistency-1"
+                          type="radio"
+                          value="1"
+                          name="workConsistency"
+                          onChange={onChangeHandler}
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex items-center px-6">
+                        <input
+                          id="workConsistency-2"
+                          type="radio"
+                          value="2"
+                          name="workConsistency"
+                          onChange={onChangeHandler}
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex items-center px-6">
+                        <input
+                          id="workConsistency-3"
+                          type="radio"
+                          value="3"
+                          name="workConsistency"
+                          onChange={onChangeHandler}
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="bg-slate-300">
+                    <th
+                      scope="row"
+                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      Communication
+                    </th>
+                    <td>
+                      <div class="flex items-center px-6">
+                        <input
+                          id="communication-1"
+                          type="radio"
+                          value="1"
+                          name="communication"
+                          onChange={onChangeHandler}
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex items-center px-6">
+                        <input
+                          id="communication-2"
+                          type="radio"
+                          value="2"
+                          name="communication"
+                          onChange={onChangeHandler}
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex items-center px-6">
+                        <input
+                          id="communication-3"
+                          type="radio"
+                          value="3"
+                          name="communication"
+                          onChange={onChangeHandler}
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="bg-white">
+                    <th
+                      scope="row"
+                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      Attendance
+                    </th>
+                    <td>
+                      <div class="flex items-center px-6">
+                        <input
+                          id="attendance-1"
+                          type="radio"
+                          value="1"
+                          name="attendance"
+                          onChange={onChangeHandler}
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex items-center px-6">
+                        <input
+                          id="attendance-2"
+                          type="radio"
+                          value="2"
+                          name="attendance"
+                          onChange={onChangeHandler}
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex items-center px-6">
+                        <input
+                          id="attendance-3"
+                          type="radio"
+                          value="3"
+                          name="attendance"
+                          onChange={onChangeHandler}
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="flex justify-end">
+                <button className="bg-blue py-1.5 px-8 rounded-lg text-white">
+                  Submit
+                </button>
+              </div>
+            </form>
           </div>
         </div>
         <div className="flex justify-center mx-16 space-x-2 mt-8">
