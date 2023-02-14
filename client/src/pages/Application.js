@@ -141,7 +141,6 @@ export const Application = () => {
 
       <div className="mx-16 flex justify-between mt-5 mb-2">
         <h1 className="font-bold">Pending Application</h1>
-        <h1 className="text-blue font-bold">{data.length} Pending</h1>
       </div>
       <div class="relative overflow-x-auto mx-16 max-h-[22rem]">
         <table class="w-full text-sm text-left text-gray-500">
