@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function GetUsers({ data: { username, name, isAdmin, _id } }) {
+function GetReviewUsers({ data: { username, name, isAdmin, _id } }) {
   return (
     <>
       <tbody className=" overflow-y-auto">
@@ -32,4 +32,4 @@ function GetUsers({ data: { username, name, isAdmin, _id } }) {
   );
 }
 
-export default GetUsers;
+export default GetReviewUsers;
