@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { login } from "../api/users";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 import Logo from "../images/simple.png";
 import eyeOff from "../images/eye-off.svg";
 import eye from "../images/eye.svg";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import jwtDecode from "jwt-decode";
 
 function Login() {
+    const decoded = localStorage.getItem("token")
+        ? jwtDecode(localStorage.getItem("token"))
+        : null;
     let navigate = useNavigate();
     const [user, setUser] = useState({
         username: "",
@@ -30,7 +33,9 @@ function Login() {
 
     const mutation = useMutation(async (user) => login(user), {
         onSuccess: () => {
-            navigate("/dashboard");
+            var dec = jwtDecode(localStorage.getItem("token"));
+            dec.data.isAdmin ? navigate("/dashboard") : navigate("/dashboard2");
+
             window.location.reload();
             toast.success("Logged in successfully", {
                 position: "top-center",

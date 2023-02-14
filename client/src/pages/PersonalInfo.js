@@ -8,7 +8,7 @@ export const Personal = () => {
     const navigate = useNavigate();
     const [profile, setProfile] = useState({});
     const queryClient = useQueryClient();
-    const mutation = useMutation((info) => createPersonalInfo(info), {
+    const mutation = useMutation((profile) => createPersonalInfo(profile), {
         onSuccess: () => {
             queryClient.invalidateQueries(["profiles"]);
             navigate("/");
@@ -50,8 +50,7 @@ export const Personal = () => {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        const info = profile;
-        mutation.mutate(info);
+        mutation.mutate(profile);
         if (mutation.isSuccess) navigate("/");
     };
 
