@@ -8,7 +8,7 @@ export const ratePerformance = async (ratings, id) => {
           "Content-Type": "application/json",
           "x-auth-token": localStorage.getItem("token"),
         },
-        body: JSON.stringify({ ratings }),
+        body: JSON.stringify(ratings),
       }
     );
     const data = await res.json();
