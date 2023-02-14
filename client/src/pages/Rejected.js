@@ -5,16 +5,16 @@ export const Rejected = ({ data }) => {
         class="inline-block px-6 py-2.5 bg-red-700 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg  focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mr-1.5"
         type="button"
         data-bs-toggle="offcanvas"
-        data-bs-target="#approved"
-        aria-controls="approved"
+        data-bs-target="#rejected"
+        aria-controls="rejected"
       >
-        View Approved
+        View Rejected
       </button>
 
       <div
         class="offcanvas offcanvas-end fixed bottom-0 flex flex-col max-w-full bg-white invisible bg-clip-padding shadow-sm outline-none transition duration-300 ease-in-out text-gray-700 top-0 right-0 border-none w-96"
         tabindex="-1"
-        id="approved"
+        id="rejected"
         aria-labelledby="offcanvasRightLabel"
       >
         <div class="offcanvas-header flex items-center justify-between p-4">
@@ -22,7 +22,7 @@ export const Rejected = ({ data }) => {
             class="offcanvas-title mb-0 leading-normal font-semibold"
             id="offcanvasRightLabel"
           >
-            Approved Leaves
+            Rejected Leaves
           </h5>
           <button
             type="button"
