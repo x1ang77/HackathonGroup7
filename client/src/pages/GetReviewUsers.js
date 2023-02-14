@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function GetReviewUsers({ data: { username, name, isAdmin } }) {
+function GetUsers({ data: { username, name, isAdmin, _id } }) {
   return (
     <>
       <tbody className=" overflow-y-auto">
@@ -19,12 +20,11 @@ function GetReviewUsers({ data: { username, name, isAdmin } }) {
           )}
 
           <td class="px-6 py-4 space-x-5">
-            <a href="#" class="font-medium text-sky-500 hover:underline">
-              Edit
-            </a>
-            <a href="#" class="font-medium text-red-500 hover:underline">
-              Delete
-            </a>
+            <Link to={`/reviewbyid/${_id}`}>
+              <a href="#" class="font-medium text-sky-500 hover:underline">
+                Review
+              </a>
+            </Link>
           </td>
         </tr>
       </tbody>
@@ -32,4 +32,4 @@ function GetReviewUsers({ data: { username, name, isAdmin } }) {
   );
 }
 
-export default GetReviewUsers;
+export default GetUsers;
