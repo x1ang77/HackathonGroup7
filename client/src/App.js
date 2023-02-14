@@ -13,6 +13,8 @@ import jwtDecode from "jwt-decode";
 import { User } from "./pages/User";
 import { Application } from "./pages/Application";
 import { Personal } from "./pages/PersonalInfo";
+import { Review } from "./pages/Review";
+import { ReviewById } from "./pages/ReviewById";
 
 function App() {
   // const { isAuth, user } = checkAuth();
@@ -31,10 +33,12 @@ function App() {
       )}
       <div className="w-full h-full overflow-hidden">
         <Routes>
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="user" element={<User />} />
-          <Route path="application" element={<Application />} />
-          <Route path="profile" element={<Personal />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/user" element={<User />} />
+          <Route path="/application" element={<Application />} />
+          <Route path="/profile" element={<Personal />} />
+          <Route path="/review" element={<Review />} />
+          <Route path="/reviewbyid/:id" element={<ReviewById />} />
           <Route element={<GuestRoutes />}>
             <Route path="/" element={<Login />} />
           </Route>

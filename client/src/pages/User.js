@@ -1,20 +1,30 @@
 import { useState } from "react";
 import { register } from "../api/users";
-import { useMutation } from "react-query";
+import { QueryClient, useMutation } from "react-query";
 import { toast } from "react-toastify";
+import { useQuery, useQueryClient } from "react-query";
+import { getAllUsers } from "../api/users";
+import GetUsers from "./GetUser";
 
 export const User = () => {
   const [user, setUser] = useState({
     username: "",
     password: "",
     name: "",
-    role: "",
+    isAdmin: "",
   });
+  console.log(user);
 
   const [error, setError] = useState();
 
+  const queryClient = useQueryClient();
+
+  const { data, isLoading } = useQuery("users", getAllUsers);
+  console.log(data);
+
   const mutation = useMutation(async (user) => register(user), {
     onSuccess: () => {
+      queryClient.invalidateQueries(["users"]);
       toast.success("Register successfully", {
         position: "top-center",
         autoClose: 5000,
@@ -39,6 +49,10 @@ export const User = () => {
     e.preventDefault();
     mutation.mutate(user);
   };
+
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
   return (
     <div>
       <div className="flex mx-16 mt-5">
@@ -99,13 +113,13 @@ export const User = () => {
           <div className=" w-[60%]">
             <select
               id="role"
-              name="role"
+              name="isAdmin"
               onChange={onChangeHandler}
               class="flex block w-full pb-6 text-sm text-gray-900 border-b-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
               <option selected>Select Role</option>
-              <option value="Admin">Admin</option>
-              <option value="nonAdmin">Non-Admin</option>
+              <option value={true}>Admin</option>
+              <option value="false">Non-Admin</option>
             </select>
           </div>
         </div>
@@ -117,7 +131,7 @@ export const User = () => {
       </form>
       <div className="mx-16 flex justify-between mt-5 mb-2">
         <h1 className="font-bold">User List</h1>
-        <h1 className="text-blue font-bold">8 User</h1>
+        <h1 className="text-blue font-bold">{data.length} User</h1>
       </div>
       <div class="relative overflow-x-auto mx-16 max-h-[22rem]">
         <table class="w-full text-sm text-left text-gray-500">
@@ -137,152 +151,11 @@ export const User = () => {
               </th>
             </tr>
           </thead>
-          <tbody className=" overflow-y-auto h-36">
-            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-100">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                simplr001
-              </th>
-              <td class="px-6 py-4">John</td>
-              <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4 space-x-5">
-                <a href="#" class="font-medium text-sky-500 hover:underline">
-                  Edit
-                </a>
-                <a href="#" class="font-medium text-red-500 hover:underline">
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-100">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                simplr001
-              </th>
-              <td class="px-6 py-4">John</td>
-              <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4 space-x-5">
-                <a href="#" class="font-medium text-sky-500 hover:underline">
-                  Edit
-                </a>
-                <a href="#" class="font-medium text-red-500 hover:underline">
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-100">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                simplr001
-              </th>
-              <td class="px-6 py-4">John</td>
-              <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4 space-x-5">
-                <a href="#" class="font-medium text-sky-500 hover:underline">
-                  Edit
-                </a>
-                <a href="#" class="font-medium text-red-500 hover:underline">
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-100">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                simplr001
-              </th>
-              <td class="px-6 py-4">John</td>
-              <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4 space-x-5">
-                <a href="#" class="font-medium text-sky-500 hover:underline">
-                  Edit
-                </a>
-                <a href="#" class="font-medium text-red-500 hover:underline">
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-100">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                simplr001
-              </th>
-              <td class="px-6 py-4">John</td>
-              <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4 space-x-5">
-                <a href="#" class="font-medium text-sky-500 hover:underline">
-                  Edit
-                </a>
-                <a href="#" class="font-medium text-red-500 hover:underline">
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-100">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                simplr001
-              </th>
-              <td class="px-6 py-4">John</td>
-              <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4 space-x-5">
-                <a href="#" class="font-medium text-sky-500 hover:underline">
-                  Edit
-                </a>
-                <a href="#" class="font-medium text-red-500 hover:underline">
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-100">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                simplr001
-              </th>
-              <td class="px-6 py-4">John</td>
-              <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4 space-x-5">
-                <a href="#" class="font-medium text-sky-500 hover:underline">
-                  Edit
-                </a>
-                <a href="#" class="font-medium text-red-500 hover:underline">
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-slate-100">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                simplr001
-              </th>
-              <td class="px-6 py-4">John</td>
-              <td class="px-6 py-4">Non-Admin</td>
-              <td class="px-6 py-4 space-x-5">
-                <a href="#" class="font-medium text-sky-500 hover:underline">
-                  Edit
-                </a>
-                <a href="#" class="font-medium text-red-500 hover:underline">
-                  Delete
-                </a>
-              </td>
-            </tr>
-          </tbody>
+          {data.length === 0 ? (
+            <h2 className="text-center p-5">No User</h2>
+          ) : (
+            data.map((user) => <GetUsers data={user} key={user._id} />)
+          )}
         </table>
       </div>
     </div>

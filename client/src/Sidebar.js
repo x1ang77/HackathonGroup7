@@ -25,7 +25,9 @@ export const Sidebar = () => {
         <NavLink to="profile">
           <FiUser />
         </NavLink>
-        <RiHandCoinLine />
+        <NavLink to="review">
+          <RiHandCoinLine />
+        </NavLink>
       </div>
       <div className="flex flex-col mx-auto text-4xl text-white space-y-10 mb-5">
         <button
