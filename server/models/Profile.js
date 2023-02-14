@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const ProfileSchema = new mongoose.Schema({
-    author: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },
@@ -36,7 +36,7 @@ const ProfileSchema = new mongoose.Schema({
         type: String,
     },
     bankAccountNumber: {
-        type: Number,
+        type: String,
     },
     socso: {
         type: String,
