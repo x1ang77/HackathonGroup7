@@ -13,10 +13,6 @@ function GetApplication({
     },
   });
 
-  //   const onChangeHandler = (e) => {
-  //     setApply({ apply, [e.target.name]: e.target.value });
-  //   };
-
   const onSubmitHandler = (apply) => {
     mutation.mutate({ apply, _id });
     console.log({ apply, name });
