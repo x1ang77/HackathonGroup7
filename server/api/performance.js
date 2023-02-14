@@ -25,6 +25,7 @@ router.post("/:id", auth, async (req, res) => {
             workConsistency,
             communication,
             attendance,
+            isDone: true,
         });
         performance.save();
         return res.json({
