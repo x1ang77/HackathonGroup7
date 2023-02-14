@@ -36,12 +36,12 @@ function App() {
             )}
             <div className="w-full h-full overflow-hidden">
                 <Routes>
-                    {/* <Route element={<AdminRoutes />}> */}
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    {/* </Route> */}
-                    {/* <Route element={<UserRoutes />}> */}
-                    <Route path="/dashboard2" element={<Dashboard2 />} />
-                    {/* </Route> */}
+                    <Route element={<AdminRoutes />}>
+                        <Route path="/dashboard" element={<Dashboard />} />
+                    </Route>
+                    <Route element={<UserRoutes />}>
+                        <Route path="/dashboard2" element={<Dashboard2 />} />
+                    </Route>
                     <Route path="/user" element={<User />} />
                     <Route path="/application" element={<Application />} />
                     <Route path="/profile" element={<Personal />} />

@@ -9,9 +9,6 @@ import eye from "../images/eye.svg";
 import jwtDecode from "jwt-decode";
 
 function Login() {
-    const decoded = localStorage.getItem("token")
-        ? jwtDecode(localStorage.getItem("token"))
-        : null;
     let navigate = useNavigate();
     const [user, setUser] = useState({
         username: "",

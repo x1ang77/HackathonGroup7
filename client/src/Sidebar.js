@@ -17,6 +17,7 @@ export const Sidebar = () => {
     console.log(decoded.data.isAdmin);
 
     let navigate = useNavigate();
+    var dec = jwtDecode(localStorage.getItem("token"));
     return (
         <>
             {decoded && (
@@ -31,10 +32,16 @@ export const Sidebar = () => {
                                 <RxDashboard />
                             </NavLink>
                         )}
+                        {dec.data.isAdmin ? (
+                            <>
+                                <NavLink to="user">
+                                    <FiUsers />
+                                </NavLink>{" "}
+                            </>
+                        ) : (
+                            <></>
+                        )}
 
-                        <NavLink to="user">
-                            <FiUsers />
-                        </NavLink>
                         <NavLink to="application">
                             <BiCalendarCheck />
                         </NavLink>
