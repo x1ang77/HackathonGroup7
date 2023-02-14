@@ -1,8 +1,7 @@
-import { FaUserCircle } from "react-icons/fa";
-import { FaUsers } from "react-icons/fa";
-import { getLeaves } from "../api/leaves";
-import { Link } from "react-router-dom";
+import { FaUserCircle, FaUsers } from "react-icons/fa";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
+import { getLeaves } from "../api/leaves";
 import { getAllUsers } from "../api/users";
 
 export const Dashboard = () => {
@@ -51,18 +50,22 @@ export const Dashboard = () => {
                         </h5>
                         <div className="w-full border-b-2 border-blue"></div>
                         <div className=" overflow-y-auto h-[15rem]">
-                            {/* {data.length === 0 ? (
-                <h2 className="text-center p-5">No Application</h2>
-              ) : (
-                data.map((user) =>
-                  user.pending == 0 ? (
-                    <div className="flex text-gray-700 text-base space-x-2 mt-2">
-                      <h1 className="font-bold">{user.name}:</h1>
-                      <h1>{user.typeOfLeave}</h1>
-                    </div>
-                  ) : null
-                )
-              )} */}
+                            {data.length === 0 ? (
+                                <h2 className="text-center p-5">
+                                    No Application
+                                </h2>
+                            ) : (
+                                data.map((user) =>
+                                    user.pending === 0 ? (
+                                        <div className="flex text-gray-700 text-base space-x-2 mt-2">
+                                            <h1 className="font-bold">
+                                                {user.name}:
+                                            </h1>
+                                            <h1>{user.typeOfLeave}</h1>
+                                        </div>
+                                    ) : null
+                                )
+                            )}
                         </div>
                     </div>
                     <div>
