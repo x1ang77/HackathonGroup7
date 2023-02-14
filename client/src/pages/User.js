@@ -13,14 +13,12 @@ export const User = () => {
     name: "",
     isAdmin: "",
   });
-  console.log(user);
 
   const [error, setError] = useState();
 
   const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery("users", getAllUsers);
-  console.log(data);
 
   const mutation = useMutation(async (user) => register(user), {
     onSuccess: () => {
